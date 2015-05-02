@@ -1,0 +1,29 @@
+spark:
+  image: asami/spark-sql-scala-docker
+  links:
+    - mysql
+    - redis
+  volumes:
+    - target/scala-2.10:/opt/command.d
+  environment:
+    COMMAND_JAR_NAME: simple-assembly-1.0.jar
+    WAIT_CONTAINER_KEY: mysql-java-embulk-docker
+    MYSQL_SERVER_USER: baseball
+    MYSQL_SERVER_PASSWORD: baseball
+mysql:
+  image: asami/mysql-java-embulk-docker
+  links:
+    - redis
+  ports:
+    - ":3306"
+  volumes:
+    - setup.d:/opt/setup.d
+  environment:
+    MYSQL_USER: baseball
+    MYSQL_PASSWORD: baseball
+    MYSQL_ROOT_PASSWORD: baseball
+    MYSQL_DATABASE: baseball
+redis:
+  image: redis
+  ports:
+    - ":6379"
