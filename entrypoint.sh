@@ -26,7 +26,7 @@ function wait_container_redis {
     do
 	sleep 1s
 	result=0
-	if [ $(redis-cli -h $REDIS_SERVER_HOST -p $REDIS_SERVER_PORT GET $WAIT_CONTAINER_KEY) = "up" ]; then
+	if [ $(redis-cli -h $REDIS_SERVER_HOST -p $REDIS_SERVER_PORT GET $WAIT_CONTAINER_KEY)'' = "up" ]; then
 	    break
 	fi
 	echo spark-sql-scala-docker wait: $REDIS_SERVER_HOST
