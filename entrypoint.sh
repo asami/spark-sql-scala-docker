@@ -69,6 +69,4 @@ wait_container
 
 sed -i "s!hdfs://.*:9000!file:\/\/\/tmp!g" /usr/local/hadoop/etc/hadoop/core-site.xml
 
-cat /usr/local/hadoop/etc/hadoop/core-site.xml
-
 spark-submit --properties-file /opt/spark-defaults.conf $COMMAND_JAR
