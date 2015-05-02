@@ -10,6 +10,8 @@ RUN rpm -ivh http://ftp-srv2.kddilabs.jp/Linux/distributions/fedora/epel/6/x86_6
 
 RUN yum -y install redis --enablerepo=epel
 
+COPY spark-defaults.conf /opt/spark-defaults.conf
+
 COPY entrypoint.sh /opt/entrypoint.sh
 
 ENV COMMAND_JAR_DIR /opt/command.d
