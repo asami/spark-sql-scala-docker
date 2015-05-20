@@ -4,7 +4,9 @@
 # WAIT_CONTAINER_FILE
 # WAIT_CONTAINER_KEY
 
-# set -x
+if [ $DEBUG'' = "true" ]; then
+    set -x
+fi
 
 set -e
 
@@ -38,10 +40,11 @@ function wait_container_redis {
 	if [ $(redis-cli -h $REDIS_SERVER_HOST -p $REDIS_SERVER_PORT GET $WAIT_CONTAINER_KEY)'' = "up" ]; then
 	    break
 	fi
-	echo spark-sql-scala-docker wait: $REDIS_SERVER_HOST
+	echo spark-sql-scala-docker wait $i: $REDIS_SERVER_HOST
 	result=1
     done
     if [ $result = 1 ]; then
+	echo EXIT
 	exit 1
     fi
 }
@@ -55,7 +58,7 @@ function wait_container_file {
 	if [ -e $WAIT_CONTAINER_FILE ]; then
 	    break
 	fi
-	echo spark-sql-scala-docker wait: $WAIT_CONTAINER_FILE
+	echo spark-sql-scala-docker wait $i: $WAIT_CONTAINER_FILE
 	result=1
     done
     if [ $result = 1 ]; then
